@@ -16,8 +16,8 @@ public class PersonsController : ControllerBase
     [HttpGet]
     public IEnumerable<Person> Get()
     {
-        var gilbert = new Person("Gilbert", "Bertrand");
-        gilbert.AddChild(new Person("Robert", "Didier"));
+        var gilbert = new Person("Gilbert", "Bertrand", new Address("42", "Emile Zola"));
+        gilbert.AddChild(new Person("Robert", "Didier", new Address("42", "Emile Zola")));
 
         return new List<Person> { 
             gilbert

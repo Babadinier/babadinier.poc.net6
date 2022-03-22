@@ -5,13 +5,15 @@ public class Person
     private readonly List<Person> children;
 
     public string LastName { get; init; }
-    public string FirstName { get; init; }
+    public string FirstName { get; private set; }
+    public Address Address { get; private set; }
     public List<Person> Children => children;
 
-    public Person(string lastName, string firstName)
+    public Person(string lastName, string firstName, Address address)
     {
-        LastName = lastName;
-        FirstName = firstName;
+        LastName = string.IsNullOrWhiteSpace(lastName) ? throw new ArgumentNullException(nameof(lastName)) : lastName;
+        FirstName = string.IsNullOrWhiteSpace(firstName) ? throw new ArgumentNullException(nameof(firstName)) : firstName;;
+        Address = address is null ? throw new ArgumentNullException(nameof(address)) : address;
         children = new();
     }
 
@@ -22,5 +24,14 @@ public class Person
             throw new ArgumentNullException(nameof(child));
         }
         children.Add(child);
+    }
+
+    public void UpdateFirstName(string firstName)
+    {
+        if (string.IsNullOrWhiteSpace(firstName))
+        {
+            throw new ArgumentNullException(nameof(firstName));
+        }
+        FirstName = firstName;
     }
 }
