@@ -19,10 +19,7 @@ public class Person
 
     public void AddChild(Person child)
     {
-        if (child is null)
-        {
-            throw new ArgumentNullException(nameof(child));
-        }
+        ArgumentNullException.ThrowIfNull(child);  
         children.Add(child);
     }
 
